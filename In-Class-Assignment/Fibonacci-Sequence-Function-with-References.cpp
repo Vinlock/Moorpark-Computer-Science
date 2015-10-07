@@ -1,4 +1,4 @@
-/* This program outputs the Fibonacci Sequence 10 times after 1 1.
+/* This program outputs the Fibonacci Sequence 10 times after 1 1 USING REFERENCES
 
 #include <iostream>
 #include <iomanip>
