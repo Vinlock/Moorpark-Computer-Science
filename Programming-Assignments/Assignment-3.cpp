@@ -42,32 +42,64 @@ int main() {
 	ifstream filename;
 	ofstream newFilename;
 
-	// Declaring the string for the team name column.
-	string teamName;
+	string teamName; // Declaring the string for the team name column.
 
-	// Counts the number of lines in a file.
-	numLines = CountLines(READ_FILE);
+	numLines = CountLines(READ_FILE); // Counts the number of lines in a file.
 
-	// Open the READ_FILE and stream contents.
-	filename.open(READ_FILE);
+	if (numLines > 0) {
 
-	// Open the WRITE_FILE and stream contents.
-	newFilename.open(WRITE_FILE);
+		cout << "Opening " << READ_FILE << endl;
 
-	// For each line, read contents, then convert to desired output and write.
-	for (int i = ZERO; i < numLines; i++) {
-		ReadInputRecord(filename, score1, score2, score3, attempt1, attempt2, attempt3, teamName); // Read the contents of 'filename' and store it into the reference variables.
-		numSolved = Solved(score1) + Solved(score2) + Solved(score3); // Find out how many were solved by the team.
-		totalTime = score1 + score2 + score3; // Fine the total time that it took for them to solve all problems.
-		iteration++; // Iterate for the first column's number.
-		WriteInputRecord(newFilename, iteration, teamName, numSolved, totalTime); // Write the new output to 'newFilename'.
+		filename.open(READ_FILE); // Open the READ_FILE and stream contents.
+
+		if (filename) {
+
+			cout << READ_FILE << " successfuly opened." << endl << endl;
+
+			cout << "Opening " << WRITE_FILE << endl;
+
+			// Open the WRITE_FILE and stream contents.
+			newFilename.open(WRITE_FILE);
+
+			if (newFilename) {
+
+				cout << WRITE_FILE << " successfully opened." << endl << endl;
+
+				// For each line, read contents, then convert to desired output and write.
+				for (int i = ZERO; i < numLines; i++) {
+					cout << "Reading line." << endl;
+					ReadInputRecord(filename, score1, score2, score3, attempt1, attempt2, attempt3, teamName); // Read the contents of 'filename' and store it into the reference variables.
+					cout << "Team: " << teamName << " found." << endl;
+					cout << "Calculating number of successfully solved problems by " << teamName << "." << endl;
+					numSolved = Solved(score1) + Solved(score2) + Solved(score3); // Find out how many were solved by the team.
+					cout << teamName << " solved " << numSolved << " problems." << endl;
+					cout << "Calculating total time it took " << teamName << " to solve " << numSolved << " problems." << endl;
+					totalTime = score1 + score2 + score3; // Fine the total time that it took for them to solve all problems.
+					cout << teamName << " took " << totalTime << " seconds to solve " << numSolved << " problems." << endl;
+					iteration++; // Iterate for the first column's number.
+					cout << "Writing data to " << WRITE_FILE << endl;
+					WriteInputRecord(newFilename, iteration, teamName, numSolved, totalTime); // Write the new output to 'newFilename'.
+					cout << "Data written to " << WRITE_FILE << endl << endl;
+				}
+
+				cout << "Closing " << WRITE_FILE << endl;
+				newFilename.close(); // Close the WRITE_FILE;
+				cout << WRITE_FILE << " closed." << endl << endl;
+			}
+			else {
+				// If 'newFilename' failed to open, display an error message.
+				cout << "Error Opening " << WRITE_FILE << endl << endl;
+			}
+
+			cout << "Closing " << READ_FILE << endl;
+			filename.close(); // Close the READ_FILE.
+			cout << READ_FILE << " closed." << endl << endl ;
+		}
+		else {
+			// If 'filename' failed to open, display an error message.
+			cout << "Error Opening " << READ_FILE << endl << endl;
+		}
 	}
-
-	// Close the WRITE_FILE;
-	newFilename.close();
-
-	// Close the READ_FILE.
-	filename.close();
 
 	return 0;
 
@@ -109,12 +141,23 @@ int CountLines(string file) {
 
 	filename.open(file); // Open the filename that was passed into the function via a string.
 
-	while (getline(filename, line)) {
-		// For each line, iterate numLines.
-		numLines++;
-	}
+	if (filename) {
 
-	filename.close(); // Close the file after done.
+		cout << "Counting number of lines in " << file << endl;
+
+		while (getline(filename, line)) {
+			// For each line, iterate numLines.
+			numLines++;
+		}
+
+		cout << numLines << " line(s) counted." << endl << endl;
+
+		filename.close(); // Close the file after done.
+
+	}
+	else {
+		cout << file << " could not be opened." << endl << endl;
+	}
 
 	return numLines; // Return the number of lines that exist.
 }
