@@ -1,5 +1,9 @@
 #pragma once
-using namespace std;
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <memory>
+#include <fstream>
 
 const unsigned int
 NUM_CARDS = 52,	// Number of Cards in a Deck.
