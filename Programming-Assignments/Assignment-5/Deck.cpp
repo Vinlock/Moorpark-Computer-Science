@@ -1,3 +1,11 @@
+/* **************************************************************************************************
+PROGRAMMING ASSIGNMENT #5 - DAK WASHBROOK -----------------------------------------------------------
+Write a C++ program to simulate a deck of cards and the ability to shuffle, cut and deal the cards.
+The deck should consists of a dynamically allocated array of Cards.  A Card is a C++ struct that
+contains the suit, and rank of the card.  Your program will read an input file (DeckCommands.txt)
+that contains a list of commands to perform on your deck of cards.
+************************************************************************************************** */
+
 using namespace std; 
 
 #include "Deck.h"
