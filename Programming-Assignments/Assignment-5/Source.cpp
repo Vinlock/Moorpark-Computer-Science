@@ -22,11 +22,11 @@ void FileProgram() {
 	ofstream dealtCards;	// Declare the output filestream variable.
 	string command;			// String variable to hold the command given in the DEAL_FILE.
 
-							/* ***********************************************************
-							Integer variable to hold the iterations: ---------------------
-							For Shuffle() - The number of times to shuffle.
-							For Cut()     - The number of cards to cut off the top.
-							*********************************************************** */
+	/* ***********************************************************
+	Integer variable to hold the iterations: ---------------------
+	For Shuffle() - The number of times to shuffle.
+	For Cut()     - The number of cards to cut off the top.
+	*********************************************************** */
 	unsigned int iterations;
 
 	bool newDeck = false;	// Boolean value to maintain a check if a NewDeck has been created or not. (Passed by reference into NewDeck().)
@@ -35,38 +35,38 @@ void FileProgram() {
 	deckCommands.open(COMMANDS_FILE);	// Open the COMMANDS__FILE with ifstream.
 	dealtCards.open(DEAL_FILE);			// Open the DEAL_FILE with ofstream.
 
-										/* **************************************
-										While loop to read the commands in
-										DEAL_FILE and place them into thecommand
-										string variable. If the command should
-										have an iteration number value then
-										continue to read that from the file into
-										the iteration integer variable.
-										************************************** */
+	/* **************************************
+	While loop to read the commands in
+	DEAL_FILE and place them into thecommand
+	string variable. If the command should
+	have an iteration number value then
+	continue to read that from the file into
+	the iteration integer variable.
+	************************************** */
 	while (deckCommands >> command) {
-		if (command == NEW_DECK_COMMAND) {			// If NEW_DECK_COMMAND is called.
-			deck = NewDeck(newDeck);				// Stores the deck (shared_ptr) into Deck if the NEW_DECK_COMMAND is called in the COMMANDS_FILE.
+		if (command == NEW_DECK_COMMAND) {		// If NEW_DECK_COMMAND is called.
+			deck = NewDeck(newDeck);			// Stores the deck (shared_ptr) into Deck if the NEW_DECK_COMMAND is called in the COMMANDS_FILE.
 		}
 		else if (newDeck) {
-			if (command == SHUFFLE_COMMAND) {		// If SHUFFLE_COMMAND is called.
-				deckCommands >> iterations;			// Store the number of shuffles into the iterations integer variable.
-				Shuffle(deck, iterations);			// Run the Shuffle() functon with the appropriate variables to Shuffle the deck.
+			if (command == SHUFFLE_COMMAND) {	// If SHUFFLE_COMMAND is called.
+				deckCommands >> iterations;		// Store the number of shuffles into the iterations integer variable.
+				Shuffle(deck, iterations);		// Run the Shuffle() functon with the appropriate variables to Shuffle the deck.
 			}
-			else if (command == CUT_COMMAND) {		// If CUT_COMMAND is called.
-				deckCommands >> iterations;			// Store the number of cards to cut off the top into the iterations integer variable.
-				Cut(deck, iterations);				// Run the Cut() function with the appropriate variables to Cut the deck.
+			else if (command == CUT_COMMAND) {	// If CUT_COMMAND is called.
+				deckCommands >> iterations;		// Store the number of cards to cut off the top into the iterations integer variable.
+				Cut(deck, iterations);			// Run the Cut() function with the appropriate variables to Cut the deck.
 			}
-			else if (command == DEAL_COMMAND) {		// If the DEAL_COMMAND is called.
-				Deal(deck, dealtCards);				// Run the Deal() function with the appropriate variables to deal the cards into the DEAL_FILE.
+			else if (command == DEAL_COMMAND) {	// If the DEAL_COMMAND is called.
+				Deal(deck, dealtCards);			// Run the Deal() function with the appropriate variables to deal the cards into the DEAL_FILE.
 			}
 		}
 		else {
-			continue;								// If none of those commands are given approprately just continue the while loop.
+			continue;							// If none of those commands are given approprately just continue the while loop.
 		}
 	}
 
-	deckCommands.close();							// Close the COMMANDS_FILE.
-	dealtCards.close();								// Close the DEAL_FILE.
+	deckCommands.close();	// Close the COMMANDS_FILE.
+	dealtCards.close();		// Close the DEAL_FILE.
 }
 
 /* **************************************************************************************************
@@ -75,17 +75,25 @@ Created the new Deck from the struct and enums.
 ************************************************************************************************** */
 shared_ptr<Card> NewDeck(bool &newDeck) {
 
-	shared_ptr<Card> deck(new Card[NUM_CARDS]);										// Allocate the memory for the array of Card structures.
-	for (unsigned int currentCard = START_ZERO; currentCard < NUM_CARDS;) {			// For loop for each card.
-		for (unsigned int suit = SPADES; suit <= DIAMONDS; suit++) {				// For loop for each suit.
-			for (unsigned int rank = ACE; rank <= TWO; rank++, currentCard++) {		// For loop for each rank.
-				(deck.get() + currentCard)->suit = static_cast<CardSuit>(suit);		// Store the current iteration's static_casted CardSuit suit to the new Deck.
-				(deck.get() + currentCard)->rank = static_cast<CardRank>(rank);		// Store the current iteration's statuc_casted CardRank rank to the new Deck.
+	// Allocate the memory for the array of Card structures.
+	shared_ptr<Card> deck(new Card[NUM_CARDS]);
+	// For loop for each card.
+	for (unsigned int currentCard = START_ZERO; currentCard < NUM_CARDS;) {
+		// For loop for each suit.
+		for (unsigned int suit = SPADES; suit <= DIAMONDS; suit++) {
+			// For loop for each rank.
+			for (unsigned int rank = ACE; rank <= TWO; rank++, currentCard++) {
+				// Store the current iteration's static_casted CardSuit suit to the new Deck.
+				(deck.get() + currentCard)->suit = static_cast<CardSuit>(suit);
+				// Store the current iteration's statuc_casted CardRank rank to the new Deck.
+				(deck.get() + currentCard)->rank = static_cast<CardRank>(rank);
 			}
 		}
 	}
-	newDeck = true;																	// Set newDeck to true so that the program knows that a NewDeck exists.
-	return deck;																	// Return the deck shared_ptr to the caller.
+	// Set newDeck to true so that the program knows that a NewDeck exists.
+	newDeck = true;
+	// Return the deck shared_ptr to the caller.
+	return deck;
 }
 
 /* **************************************************************************************************
@@ -97,10 +105,11 @@ the Cut command.
 void Cut(shared_ptr<Card> &cutDeck, const unsigned int NUM_CUT) {
 	// Check if the passed NUM_CUT is less than the number of cards in the deck and greater than 0
 	if ((NUM_CUT < NUM_CARDS) && (NUM_CUT > POSSIBLE_ZERO)) {
-		unique_ptr<Card> tempDeck(new Card[NUM_CARDS]);		// Create a unique_ptr for a new temporary deck.
-															/* ***************************************************
-															For loop to copy the deck that is passed by reference.
-															*************************************************** */
+		// Create a unique_ptr for a new temporary deck.
+		unique_ptr<Card> tempDeck(new Card[NUM_CARDS]);
+		/* ***************************************************
+		For loop to copy the deck that is passed by reference.
+		*************************************************** */
 		for (unsigned int r = START_ZERO; r < NUM_CARDS; r++) {
 			// Set the passed by reference deck suit in the current iteration to the temporary deck's suit.
 			(tempDeck.get() + r)->suit = (cutDeck.get() + r)->suit;
@@ -143,8 +152,10 @@ void Shuffle(shared_ptr<Card> &shuffledDeck, const unsigned int TIMES) {
 	For loop for number of times to shuffle.
 	********************************************************************* */
 	for (unsigned int shuffles = START_ZERO; shuffles < TIMES; shuffles++) {
-		unique_ptr<Card> leftDeck(new Card[NUM_CARDS / HALF]);		// Create a unique_ptr for the left half of the deck.
-		unique_ptr<Card> rightDeck(new Card[NUM_CARDS / HALF]);		// Create a unique_ptr for the right half of the deck.
+		// Create a unique_ptr for the left half of the deck.
+		unique_ptr<Card> leftDeck(new Card[NUM_CARDS / HALF]);
+		// Create a unique_ptr for the right half of the deck.
+		unique_ptr<Card> rightDeck(new Card[NUM_CARDS / HALF]);
 		/* ****************************************************
 		For loop to split the deck into the two halves.
 		Top half = left, Bottom half = right.
@@ -180,9 +191,12 @@ TRANSLATE TO CARD NAME STRINGS: ------------------------------------------------
 Translates all the cards into user-readable strings.
 ************************************************************************************************** */
 string TranslateCard(Card card) {
-	string cardString;																		// Declare the string that will be returned.
-	cardString.append(RANKS[card.rank]).append(OUTPUT_DELIMITER).append(SUITS[card.suit]);	// Append strings together "rank of suit".
-	return cardString;																		// Return the new string.
+	// Declare the string that will be returned.
+	string cardString;
+	// Append strings together "rank of suit".
+	cardString.append(RANKS[card.rank]).append(OUTPUT_DELIMITER).append(SUITS[card.suit]);
+	// Return the new string.
+	return cardString;
 }
 
 /* **************************************************************************************************
