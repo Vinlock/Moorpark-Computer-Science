@@ -27,7 +27,8 @@ void FileProgram() {
 	unsigned int iterations;
 
 	bool newDeck = false;	// Boolean value to maintain a check if a NewDeck has been created or not. (Passed by reference into NewDeck().)
-	shared_ptr<Card> deck;	// Declare the shared_ptr of the variable that will be holding the address of deck.
+
+	shared_ptr<Card> deck;
 
 	deckCommands.open(COMMANDS_FILE);	// Open the COMMANDS__FILE with ifstream.
 	dealtCards.open(DEAL_FILE);			// Open the DEAL_FILE with ofstream.
@@ -72,7 +73,6 @@ Created the new Deck from the struct and enums.
 ************************************************************************************************** */
 shared_ptr<Card> NewDeck(bool &newDeck) {
 
-	// Allocate the memory for the array of Card structures.
 	shared_ptr<Card> deck(new Card[NUM_CARDS]);
 	// For loop for each card.
 	for (unsigned int currentCard = START_ZERO; currentCard < NUM_CARDS;) {
@@ -80,16 +80,13 @@ shared_ptr<Card> NewDeck(bool &newDeck) {
 		for (unsigned int suit = SPADES; suit <= DIAMONDS; suit++) {
 			// For loop for each rank.
 			for (unsigned int rank = ACE; rank <= TWO; rank++, currentCard++) {
-				// Store the current iteration's static_casted CardSuit suit to the new Deck.
 				(deck.get() + currentCard)->suit = static_cast<CardSuit>(suit);
-				// Store the current iteration's statuc_casted CardRank rank to the new Deck.
 				(deck.get() + currentCard)->rank = static_cast<CardRank>(rank);
 			}
 		}
 	}
 	// Set newDeck to true so that the program knows that a NewDeck exists.
 	newDeck = true;
-	// Return the deck shared_ptr to the caller.
 	return deck;
 }
 
@@ -100,17 +97,15 @@ of the array.  If the # (number of cards to cut) isnít a valid value your progr
 the Cut command.
 ************************************************************************************************** */
 void Cut(shared_ptr<Card> &cutDeck, const unsigned int NUM_CUT) {
-	// Check if the passed NUM_CUT is less than the number of cards in the deck and greater than 0
+	// Error checking
 	if ((NUM_CUT < NUM_CARDS) && (NUM_CUT > POSSIBLE_ZERO)) {
 		// Create a unique_ptr for a new temporary deck.
 		unique_ptr<Card> tempDeck(new Card[NUM_CARDS]);
 		/* ***************************************************
-		For loop to copy the deck that is passed by reference.
+		For loop to copy the deck.
 		*************************************************** */
 		for (unsigned int r = START_ZERO; r < NUM_CARDS; r++) {
-			// Set the passed by reference deck suit in the current iteration to the temporary deck's suit.
 			(tempDeck.get() + r)->suit = (cutDeck.get() + r)->suit;
-			// Set the passed by reference deck rank in the current iteration to the temporary deck's rank.
 			(tempDeck.get() + r)->rank = (cutDeck.get() + r)->rank;
 		}
 		/* ***************************************************
@@ -149,9 +144,7 @@ void Shuffle(shared_ptr<Card> &shuffledDeck, const unsigned int TIMES) {
 	For loop for number of times to shuffle.
 	********************************************************************* */
 	for (unsigned int shuffles = START_ZERO; shuffles < TIMES; shuffles++) {
-		// Create a unique_ptr for the left half of the deck.
 		unique_ptr<Card> leftDeck(new Card[NUM_CARDS / HALF]);
-		// Create a unique_ptr for the right half of the deck.
 		unique_ptr<Card> rightDeck(new Card[NUM_CARDS / HALF]);
 		/* ****************************************************
 		For loop to split the deck into the two halves.
@@ -188,11 +181,8 @@ TRANSLATE TO CARD NAME STRINGS: ------------------------------------------------
 Translates all the cards into user-readable strings.
 ************************************************************************************************** */
 string TranslateCard(Card card) {
-	// Declare the string that will be returned.
 	string cardString;
-	// Append strings together "rank of suit".
 	cardString.append(RANKS[card.rank]).append(OUTPUT_DELIMITER).append(SUITS[card.suit]);
-	// Return the new string.
 	return cardString;
 }
 
@@ -207,7 +197,6 @@ void Deal(shared_ptr<Card> finalDeck, ofstream &outputFile) {
 	translated string values into the DEAL_FILE.
 	**************************************************** */
 	for (unsigned int i = START_ZERO; i < NUM_CARDS; i++) {
-		// Output after using TranslateCard() to change the integers into their string counter parts.
 		outputFile << TranslateCard(*(finalDeck.get() + i)) << endl;
 	}
 }
