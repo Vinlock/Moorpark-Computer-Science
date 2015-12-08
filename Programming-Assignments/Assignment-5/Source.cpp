@@ -26,7 +26,11 @@ void FileProgram() {
 	*********************************************************** */
 	unsigned int iterations;
 
-	bool newDeck = false;	// Boolean value to maintain a check if a NewDeck has been created or not. (Passed by reference into NewDeck().)
+	/* *************************************************************
+	Boolean value to maintain a check if a NewDeck has been created
+	or not. (Passed by reference into NewDeck().)
+	************************************************************* */
+	bool newDeck = false;
 
 	shared_ptr<Card> deck;
 
