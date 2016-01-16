@@ -6,7 +6,16 @@ using namespace std;
 
 /* Declaration of the Structure used to store the different budget variables. */
 struct MonthlyBudget {
-	double housing, utilities, household_expenses, transportation, food, medical, insurance, entertainment, clothing, misc;
+	double housing = 0.0;
+	double utilities = 0.0;
+	double household_expenses = 0.0;
+	double transportation = 0.0;
+	double food = 0.0;
+	double medical = 0.0;
+	double insurance = 0.0;
+	double entertainment = 0.0;
+	double clothing = 0.0;
+	double misc = 0.0;
 };
 
 void AskUser(MonthlyBudget budget);
