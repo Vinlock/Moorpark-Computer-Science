@@ -96,8 +96,6 @@ string Calculate(double spent, double goal) {
 	}
 	else if (spent == goal) {
 		result.append(MET_BUDGET);
-		string str = to_string(difference);
-		result.append(str);
 	}
 	while (result.length() < 25) {
 		result.append(" ");
