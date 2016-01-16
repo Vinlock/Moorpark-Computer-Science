@@ -6,20 +6,21 @@ using namespace std;
 
 /* Declaration of the Structure used to store the different budget variables. */
 struct MonthlyBudget {
-	double housing = 0.0;
-	double utilities = 0.0;
-	double household_expenses = 0.0;
-	double transportation = 0.0;
-	double food = 0.0;
-	double medical = 0.0;
-	double insurance = 0.0;
-	double entertainment = 0.0;
-	double clothing = 0.0;
-	double misc = 0.0;
+	double housing;
+	double utilities;
+	double household_expenses;
+	double transportation;
+	double food;
+	double medical;
+	double insurance;
+	double entertainment;
+	double clothing;
+	double misc;
 };
 
-void AskUser(MonthlyBudget budget);
+MonthlyBudget AskUser();
 string Calculate(double budget, double goal);
+string Round(double dbl);
 void Report(MonthlyBudget budget);
 
 /* Declared Constants for the budget goals. */
@@ -45,15 +46,15 @@ MET_BUDGET = "Met Budget!";
 
 int main() {
 
-	MonthlyBudget budget;
-	AskUser(budget);
+	MonthlyBudget budget = AskUser();
 	Report(budget);
 
 	return 0;
 
 }
 
-void AskUser(MonthlyBudget budget) {
+MonthlyBudget AskUser() {
+	MonthlyBudget budget;
 	cout << "Please enter the amounts spent in each budget category during a month." << endl << endl;
 
 	cout << "Housing: ";
@@ -85,31 +86,35 @@ void AskUser(MonthlyBudget budget) {
 
 	cout << "Misc: ";
 	cin >> budget.misc;
+
+	return budget;
 }
 
-string Calculate(double spent, double goal) {
+string Calculate(double spent, const double goal) {
 	/* This function finds out if the spent amount meets, or is higher/lower, than the goal budget. */
 	string result;
 	double difference;
 	if (spent > goal) {
 		difference = spent - goal;
-		result.append(UNDER_BUDGET);
-		string str = to_string(difference);
-		result.append(str);
+		result.append(OVER_BUDGET);
+		result.append(Round(difference));
 	}
 	else if (spent < goal) {
 		difference = goal - spent;
-		result.append(OVER_BUDGET);
-		string str = to_string(difference);
-		result.append(str);
+		result.append(UNDER_BUDGET);
+		result.append(Round(difference));
 	}
 	else if (spent == goal) {
 		result.append(MET_BUDGET);
 	}
-	while (result.length() < 25) {
-		result.append(" ");
-	}
 	return result;
+}
+
+string Round(double dbl) {
+	stringstream buffer;
+	buffer.precision(2);
+	buffer << fixed << dbl;
+	return buffer.str();
 }
 
 void Report(MonthlyBudget budget) {
