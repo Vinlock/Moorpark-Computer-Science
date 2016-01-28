@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <math.h>
+#include <string>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ private:
     const float NUM_MONTHS = 12.0;  // Number of months in a year.
     const float ONE = 1.0;          // Const for one.
     const float HUNDRED = 100.0;    // Const for one hundred.
+    const string ERROR = "Invalid Entry!";
     
     float monthlyPayment = 0.0;     // Monthly Payment.
     float loanAmount = 0.0;         // The dollar amount of the loan.
@@ -36,24 +38,40 @@ private:
         return pow(Mortgage::ONE + (this->interestRate / Mortgage::NUM_MONTHS), (Mortgage::NUM_MONTHS * this->numYears));
     }
     
-    bool checkInput(float input) {
-        if (input < 0) {
-            return false;
-        }
-        else {
-            return true;
-        }
+    void throwError() {
+        cout << endl << Mortgage::ERROR << endl << endl;
     }
     
 public:
-    void setLoanAmount(float amount) {
-        this->loanAmount = amount;
+    bool setLoanAmount(float amount) {
+        if (amount < 1) {
+            this->throwError();
+            return false;
+        }
+        else {
+            this->loanAmount = amount;
+            return true;
+        }
     }
-    void setInterestRate(float rate) {
-        this->interestRate = rate / Mortgage::HUNDRED;
+    bool setInterestRate(float rate) {
+        if (rate < 1) {
+            this->throwError();
+            return false;
+        }
+        else {
+            this->interestRate = rate / Mortgage::HUNDRED;
+            return true;
+        }
     }
-    void setYears(float years) {
-        this->numYears = years;
+    bool setYears(float years) {
+        if (years < 1) {
+            this->throwError();
+            return false;
+        }
+        else {
+            this->numYears = years;
+            return true;
+        }
     }
     float getMonthlyPayment() {
         this->payment();
@@ -64,22 +82,28 @@ public:
 
 int main() {
     
-    float years, rate, amount;
+    float years = 0.0, rate = 0.0, amount = 0.0;
+    bool good = true;
     
     Mortgage homeLoan;
     
-    cout << "Loan Amount: $";
-    cin >> amount;
+    do {
+        cout << "Loan Amount: $";
+        cin >> amount;
+        good = homeLoan.setLoanAmount(amount);
+    } while (!good);
     
-    cout << "Interest Rate (Percent): %";
-    cin >> rate;
+    do {
+        cout << "Interest Rate (Percent): %";
+        cin >> rate;
+        good = homeLoan.setInterestRate(rate);
+    } while (!good);
     
-    cout << "Number of Years for Loan: ";
-    cin >> years;
-    
-    homeLoan.setInterestRate(rate);
-    homeLoan.setLoanAmount(amount);
-    homeLoan.setYears(years);
+    do {
+        cout << "Number of Years for Loan: ";
+        cin >> years;
+        good = homeLoan.setYears(years);
+    } while (!good);
     
     cout.precision(2);
     
