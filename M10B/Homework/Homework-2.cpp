@@ -1,3 +1,11 @@
+//
+//  main.cpp
+//  HW3
+//
+//  Created by Vinlock on 1/28/16.
+//  Copyright © 2016 PvP All Day. All rights reserved.
+//
+
 #include <iostream>
 #include <math.h>
 
@@ -10,7 +18,7 @@ public:
         this->loanAmount = amount;
     }
     void setInterestRate(float rate) {
-        this->interestRate = rate * Mortgage::HUNDRED;
+        this->interestRate = rate / Mortgage::HUNDRED;
     }
     void setYears(float years) {
         this->numYears = years;
@@ -63,7 +71,7 @@ int main() {
     cout << "Loan Amount: $";
     cin >> amount;
     
-    cout << "Interest Rate: %";
+    cout << "Interest Rate (Percent): %";
     cin >> rate;
     
     cout << "Number of Years for Loan: ";
