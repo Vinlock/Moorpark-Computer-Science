@@ -77,7 +77,5 @@ int main() {
     
     cout << "Monthly Payment = $" << fixed << homeLoan.getMonthlyPayment();
     
-    
-    
     return 0;
 }
