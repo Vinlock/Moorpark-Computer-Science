@@ -13,21 +13,6 @@ using namespace std;
 
 class Mortgage {
     
-public:
-    void setLoanAmount(float amount) {
-        this->loanAmount = amount;
-    }
-    void setInterestRate(float rate) {
-        this->interestRate = rate / Mortgage::HUNDRED;
-    }
-    void setYears(float years) {
-        this->numYears = years;
-    }
-    float getMonthlyPayment() {
-        this->payment();
-        return this->monthlyPayment;
-    }
-    
 private:
     
     const float NUM_MONTHS = 12.0;  // Number of months in a year.
@@ -58,6 +43,21 @@ private:
         else {
             return true;
         }
+    }
+    
+public:
+    void setLoanAmount(float amount) {
+        this->loanAmount = amount;
+    }
+    void setInterestRate(float rate) {
+        this->interestRate = rate / Mortgage::HUNDRED;
+    }
+    void setYears(float years) {
+        this->numYears = years;
+    }
+    float getMonthlyPayment() {
+        this->payment();
+        return this->monthlyPayment;
     }
     
 };
