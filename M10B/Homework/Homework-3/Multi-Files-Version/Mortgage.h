@@ -27,13 +27,16 @@ private:
 	const string ERR_YEARS = "Invalid Years!";
 
 	/* **************************************************
-	Class member variables
+	Class Member Variables
 	************************************************** */
 	float monthlyPayment = 0.0;     // Monthly Payment.
 	float loanAmount = 0.0;         // The dollar amount of the loan.
 	float interestRate = 0.0;       // The annual interest rate.
 	float numYears = 0.0;           // The number of years of the loan.
 
+	/* **************************************************
+	Private Member Functions
+	************************************************** */
 
 	void MonthlyPayment();
 
@@ -48,6 +51,10 @@ private:
 	float GetMonthPrincipal(float balance);
 
 public:
+
+	/* **************************************************
+	Public Member Functions
+	************************************************** */
 
 	bool SetLoanAmount(float amount);
 
