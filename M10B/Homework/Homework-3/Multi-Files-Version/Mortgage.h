@@ -37,7 +37,6 @@ private:
 	/* **************************************************
 	Private Member Functions
 	************************************************** */
-
 	void MonthlyPayment();
 
 	float PeriodInterestRate();
@@ -55,7 +54,6 @@ public:
 	/* **************************************************
 	Public Member Functions
 	************************************************** */
-
 	bool SetLoanAmount(float amount);
 
 	bool SetInterestRate(float rate);
