@@ -49,6 +49,9 @@ float Mortgage::GetMonthPrincipal(float balance) {
 	return this->monthlyPayment - this->GetMonthInterest(balance);
 }
 
+
+
+
 // PUBLIC FUNCTIONS
 
 bool Mortgage::SetLoanAmount(float amount) {
@@ -164,6 +167,11 @@ void Mortgage::PrintStatement() {
 }
 
 void Mortgage::AskUser() {
+	/* **************************************************
+	This function quieries the user for the Loan Amount,
+	Interest Rate, and Years until Loan maturity.
+	************************************************** */
+
 	/* **************************************************
 	First, initialize the floating point values for
 	years, rate, and amount. These will store the values
