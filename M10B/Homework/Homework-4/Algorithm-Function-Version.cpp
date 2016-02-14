@@ -41,7 +41,7 @@ public:
 			char b = text.at(len - 1 - place);	// Set b to the current string place from the end of the string.
 			if (tolower(a) == tolower(b)) {		// Compare a and b.
 				if (!Check(text, place + 1)) {	// If a == b, continue recursion.
-					return false;				// If any recursion returns false, the rest of the stack will return false.
+					return false;		// If any recursion returns false, the rest of the stack will return false.
 				}
 			}
 			else {
