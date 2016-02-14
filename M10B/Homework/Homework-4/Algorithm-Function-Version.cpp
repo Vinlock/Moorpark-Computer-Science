@@ -19,9 +19,9 @@ public:
 		************************************ */
 		if (place == 0) {
 			/*
+			- Alex's idea -
 			If it is the first depth of recursion, filter all
 			non-alphabet characters out of the string.
-			- Alex's idea -
 			*/
 			text.erase(remove_if(text.begin(), text.end(), isspace), text.end());
 			text.erase(remove_if(text.begin(), text.end(), ispunct), text.end());
