@@ -85,7 +85,7 @@ public:
 	* Print this Complex Number as (a, b). Where a is the real number and b is the imaginary part.
 	*/
 	void print() {
-		cout << "(" << this->real << ", " << this->imaginary << ")" << endl;
+		cout << endl << "The new imaginary number is: (" << this->real << ", " << this->imaginary << ")" << endl << endl;
 	}
 
 	/**
