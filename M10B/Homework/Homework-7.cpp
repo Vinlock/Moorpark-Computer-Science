@@ -93,8 +93,10 @@ int main() {
 					break;
 				case 3:
 					goto store;
+					break;
 				default:
 					goto stop;
+					break;
 				}
 
 			} while (true);
