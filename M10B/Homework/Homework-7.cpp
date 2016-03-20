@@ -1,3 +1,32 @@
+/* **********************************************************************************************
+Homework: #7
+Author: Dak Washbrook
+Due: Sun. March 20, 2016
+
+Title: Complex Number
+Assignment: Create a class called Complex for performing arithmetic with complex numbers. Write a
+program to test your class.
+
+Complex numbers have the form:
+realPart + imaginaryPart * i
+
+Use double variables to represent the private data of the class. Provide a constructor that
+enables an object of this class to be initialized when it is declared. The constructor should
+contain default values in case no initializers are provided. Provide public member functions that
+perform the following tasks:
+
+a) Adding two complex numbers: The real parts added together and the imaginary parts are
+added together.
+
+b) Subtracting two complex numbers: The real parts subtracted together and the imaginary
+parts are subtracted together.
+
+c) Printing Complex numbers in the form (a , b), where a is the real part and b is the
+imaginary part.
+
+(Do not use operator overloading for this assignment.)
+********************************************************************************************** */
+
 #include <iostream>
 
 using namespace std;
