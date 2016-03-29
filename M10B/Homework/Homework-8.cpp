@@ -1,3 +1,15 @@
+/**
+*
+* Dak Washbrook - CS M10B - CRN 30110
+*
+* Design a class called NumDays. The class’s purpose is to store a value that represents a
+* number of work hours and converts it to a number of days. For example, 8 hours would be
+* converted to 1 day. 12 hours would be converted to 1.5 days, and 18 hours would be converted
+* to 2.25 days. The class should have a constructor that accepts a member of hours, as well as
+* member functions for storing and retrieving the hours and days. The class should also have the
+* following overloaded operators
+*/
+
 #include <iostream>
 #include <stdio.h>
 
