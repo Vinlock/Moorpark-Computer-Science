@@ -56,14 +56,6 @@ public:
 		this->y = y;
 	}
 
-	// A point does not have an area or volume, so they remain zero.
-	double area() {
-		return 0.0;
-	}
-	double volume() {
-		return 0.0;
-	}
-
 	// Print the Name of the Shape.
 	void printShapeName() {
 		cout << endl << "Point" << endl;
