@@ -49,7 +49,7 @@ public:
 	}
 
 	void printShapeName() {
-		cout << endl << typeid(*this).name() << endl;
+		cout << endl << "Point" << endl;
 	}
 
 	void print() {
@@ -84,6 +84,10 @@ public:
 	
 	double area() {
 		return this->pi * sqrt(radius);
+	}
+
+	void printShapeName() {
+		cout << endl << "Circle" << endl;
 	}
 
 	void print() {
@@ -122,6 +126,10 @@ public:
 
 	double volume() {
 		return this->pi * sqrt(this->radius) * this->height;
+	}
+
+	void printShapeName() {
+		cout << endl << "Cylinder" << endl;
 	}
 
 	void print() {
