@@ -1,11 +1,6 @@
 #include "Prompt.h"
 
 
-Prompt::Prompt()
-{
-}
-
-
 string Prompt::ask(string question, bool(*verify)(string)) {
 	string answer;
 	do {
