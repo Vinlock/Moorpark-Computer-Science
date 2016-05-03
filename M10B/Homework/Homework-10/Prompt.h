@@ -4,10 +4,8 @@
 
 using namespace std;
 
-class Prompt
-{
+class Prompt {
 public:
-	Prompt();
 	string ask(string, bool(*)(string) = Prompt::default);
 	static bool default(string = "");
 };
